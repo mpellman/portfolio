@@ -1,0 +1,332 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+var ScrollSneak = function(prefix, wait) {
+    // clean up arguments (allows prefix to be optional - a bit of overkill)
+    if (typeof(wait) == 'undefined' && prefix === true) prefix = null, wait = true;
+    prefix = (typeof(prefix) == 'string' ? prefix : window.location.host).split('_').join('');
+    var pre_name;
+
+    // scroll function, if window.name matches, then scroll to that position and clean up window.name
+    this.scroll = function() {
+        if (window.name.search('^'+prefix+'_(\\d+)_(\\d+)_') == 0) {
+            var name = window.name.split('_');
+            window.scrollTo(name[1], name[2]);
+            window.name = name.slice(3).join('_');
+        }
+    }
+    // if not wait, scroll immediately
+    if (!wait) this.scroll();
+
+    this.sneak = function() {
+	// prevent multiple clicks from getting stored on window.name
+	if (typeof(pre_name) == 'undefined') pre_name = window.name;
+
+	// get the scroll positions
+        var top = 0, left = 0;
+        if (typeof(window.pageYOffset) == 'number') { // netscape
+            top = window.pageYOffset, left = window.pageXOffset;
+        } else if (document.body && (document.body.scrollLeft || document.body.scrollTop)) { // dom
+            top = document.body.scrollTop, left = document.body.scrollLeft;
+        } else if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) { // ie6
+            top = document.documentElement.scrollTop, left = document.documentElement.scrollLeft;
+        }
+	// store the scroll
+        if (top || left) window.name = prefix + '_' + left + '_' + top + '_' + pre_name;
+        return true;
+    }
+}
+
+body {
+	padding: 0;
+	margin: 0;
+    background-color: white;
+    font-family: 'Droid Serif', arial, sans-serif;
+    color: #2D2D2D;
+    font-weight: 400;
+	font-size: 10px; // 1rem;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+	font-family: Oswald;
+}
+
+h1 {
+	font-weight: 700;
+	font-size: 16rem;
+	line-height: 16rem;
+	text-align: center;
+	background: -webkit-linear-gradient(#ffdc8a, #cc9c52);
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+	/*color: #e9fe00;*/
+}
+
+h2 {
+	font-weight: 300;
+	font-size: 2rem;
+	line-height: 3rem;
+	text-transform: uppercase;
+	text-align:center;
+	margin-top:
+}
+
+h3, h4, p {
+	font-family: Droid+Serif, arial, sans-serif;
+}
+
+h3 {
+	font-size: 1rem;
+	text-transform: uppercase;
+	line-height: 1rem;
+	margin-top: 1rem;
+}
+
+h4 {
+	font-size: .8rem;
+	color: #777777;
+	font-weight: 400italic;
+	line-height: 1.2rem;
+	font-style: italic;
+}
+
+p {
+	font-size: .9rem;
+	line-height: 1.5rem;
+	font-weight:400;
+	margin: 0 2rem 2rem 2rem;
+	padding: 0 10%;
+	text-align: center;
+}
+
+
+
+a.button {
+	font-weight: 400;
+	color: #ffdc8a;
+	background: #2d2d2d;
+	text-decoration: none;
+	padding: .75rem 1rem;
+}
+
+a.button:hover {
+	color: white;
+	background-color: #2D2D2D;
+}
+
+a.button:active {
+	color: white;
+	background-color: #2D2D2D;
+}
+
+/*.hide-text {
+	text-indent: 100%;
+ 	white-space: nowrap;
+ 	overflow: hidden;
+}
+
+.bottom-rule {
+	display:block;
+	margin: 0 20% 1rem 20%;
+	border-bottom: thin solid white;
+}*/
+
+
+section {
+	height: auto;
+	
+}
+
+section.flower {
+	background-image: url(images/header-flower.png);
+	height: 100vh;
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:cover;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+
+section.flower img {
+	display:block;
+	margin: 0 auto;
+}
+
+
+.spacer {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+section.index {
+	padding-top: 50px;
+	margin: 10 auto;
+	min-width: 280px;	
+}
+
+.worktiles {
+	padding: 30px;
+	margin: 0 auto;
+	max-width: 1200px;
+}
+
+.tile {
+	width: 33.3%;
+	padding-bottom: 35%;
+	position: relative;
+	float: left;
+}
+
+.photo-container {
+	position: absolute;
+	left: 5px;
+	right: 5px;
+	top: 5px;
+	bottom: 5px;
+}
+
+.tile img {
+	width: 100%;
+	position: relative;
+	}
+	
+.button {
+	font-style:italic;
+	font-weight: 400;
+	color: #2D2D2D;
+	background-color: #e9fe00;
+	text-decoration: none;
+	padding: .75rem 1rem;
+}
+
+.button:hover {
+	background-color: white;
+}
+
+.button:active {
+	background-color: white;
+}
+
+/*Poster Page*/
+
+.interior-pg {
+	padding: 30px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+ 
+.interior-pg p {
+	text-align:left;
+	color: #777777;
+	padding: 0 10% 0 0;
+}
+
+
+.interior-pg h3 {
+	margin: 0 2rem 1rem 2rem;
+}
+
+.inner-left {
+	width: 33%;
+	padding-bottom: 15%;
+	position: relative;
+	float: left;
+}
+		
+.inner-right {
+	width:66%;
+	position: relative;
+	float: left;
+	text-align: center;
+	overflow: hidden;
+}
+
+.clear {
+	clear: both;
+}
+
+
+.inner-right img {
+	max-width: 100%;
+	position:relative;
+	padding-bottom: 10%;
+	}
+	
+	
+.video {
+	padding-bottom: 10%;
+	overflow:hidden;
+	width: 100%;
+}
+
+/*.fixed {
+	position: fixed;
+	width: 33%;
+	overflow: auto;
+	
+	}*/
+
+@media only screen and (max-width: 768px){
+
+.tile {
+	width: 50%;
+	padding-bottom: 50%;
+}
+
+.inner-left {
+	width: 100%;
+	}
+	
+.inner-right {
+	width: 100%;
+	}	
+	
+.small-arrow {
+	width: 10%;
+}
+
+@media only screen and (max-width: 500px){
+h1 {
+	font-size: 10rem;
+	line-height: 10rem;
+	}
+
+.tile {
+	width: 100%;
+	padding-bottom: 100%;
+}
+
+section.flower img {
+	width: 80%;
+	height: auto;
+}
+	
+	}
